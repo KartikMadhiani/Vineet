@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdf2f8; /* A soft rose white */
+            color: #581c87; /* Deep purple for contrast */
+        }
+        .dancing-script { font-family: 'Dancing Script', cursive; }
+        .playfair-display { font-family: 'Playfair Display', serif; }
+
+        /* General Page Transitions */
+        .page {
+            display: none; /* Hide all pages by default */
+            animation: fadeInPage 0.8s ease-in-out forwards;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Page Specific Styles */
+        .home-bg {
+            background: linear-gradient(135deg, #fff0f5, #fde4e4, #fff5f7);
+            overflow: hidden;
+        }
+        .heart {
+            position: absolute;
+            opacity: 0;
+            animation: fall 10s linear infinite;
+        }
+        .heart svg { fill: currentColor; }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+        .heartbeat { animation: heartbeat 2.5s infinite ease-in-out; }
+
+        /* Gallery Styles */
+        .gallery-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .modal {
+            transition: opacity 0.3s ease;
+        }
+
+        /* Timeline Styles */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #f472b6;
+            border: 4px solid #fff;
+        }
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: -21px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #f9a8d4;
+        }
+
+        /* Reasons Page Styles */
+        .reason-heart {
+            transition: transform 0.3s ease, color 0.3s ease;
+            cursor: pointer;
+        }
+        .reason-heart:hover {
+            transform: scale(1.1);
+            color: #ec4899;
+        }
+        .reason-text {
+            display: none;
+            text-align: center;
+            margin-top: 1rem;
+            animation: fadeInReason 0.5s ease forwards;
+        }
+        @keyframes fadeInReason {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-rose-50 text-purple-900">
+
+    <!-- Navigation -->
+    <nav class="bg-white/70 backdrop-blur-md shadow-lg sticky top-4 mx-4 md:mx-auto md:max-w-2xl rounded-full z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-center space-x-6 md:space-x-12 py-3">
+                <a href="#" class="nav-link text-lg hover:text-pink-500 transition-colors duration-300" data-page="home">Home</a>
+                <a href="#" class="nav-link text-lg hover:text-pink-500 transition-colors duration-300" data-page="gallery">Gallery</a>
+                <a href="#" class="nav-link text-lg hover:text-pink-500 transition-colors duration-300" data-page="story">Our Story</a>
+                <a href="#" class="nav-link text-lg hover:text-pink-500 transition-colors duration-300" data-page="reasons">Reasons</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Page: Home -->
+        <section id="home" class="page active">
+            <div class="home-bg min-h-screen flex flex-col items-center justify-center p-4 relative">
+                <div id="hearts-container" class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none"></div>
+                <div class="text-center z-10">
+                    <h1 class="dancing-script text-6xl md:text-8xl text-rose-500" style="text-shadow: 2px 2px 10px rgba(0,0,0,0.1);">I love you</h1>
+                    <p class="mt-4 text-3xl md:text-5xl text-rose-400 playfair-display">baby</p>
+                    <div class="flex justify-center mt-10">
+                        <svg class="w-12 h-12 text-rose-500 heartbeat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page: Gallery -->
+        <section id="gallery" class="page py-20 px-4">
+            <div class="container mx-auto text-center">
+                <h2 class="dancing-script text-5xl md:text-7xl text-pink-500 mb-4">Our Memories</h2>
+                <p class="text-xl text-purple-800 mb-12 max-w-2xl mx-auto">A collection of moments that tell our story.</p>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                    <!-- Replace these with your actual images -->
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://placehold.co/600x800/f472b6/ffffff?text=Our+First+Date')"><img src="https://placehold.co/600x800/f472b6/ffffff?text=Our+First+Date" alt="Memory 1" class="w-full h-full object-cover"></div>
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://placehold.co/800x600/ec4899/ffffff?text=Vacation')"><img src="https://placehold.co/800x600/ec4899/ffffff?text=Vacation" alt="Memory 2" class="w-full h-full object-cover"></div>
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg col-span-2 md:col-span-1" onclick="openModal('https://placehold.co/600x400/f9a8d4/ffffff?text=Silly+Moments')"><img src="https://placehold.co/600x400/f9a8d4/ffffff?text=Silly+Moments" alt="Memory 3" class="w-full h-full object-cover"></div>
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://placehold.co/600x800/fbcfe8/ffffff?text=Just+Us')"><img src="https://placehold.co/600x800/fbcfe8/ffffff?text=Just+Us" alt="Memory 4" class="w-full h-full object-cover"></div>
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://placehold.co/600x600/db2777/ffffff?text=Anniversary')"><img src="https://placehold.co/600x600/db2777/ffffff?text=Anniversary" alt="Memory 5" class="w-full h-full object-cover"></div>
+                    <div class="gallery-item rounded-lg overflow-hidden shadow-lg" onclick="openModal('https://placehold.co/800x600/fce7f3/86198f?text=Everyday+Magic')"><img src="https://placehold.co/800x600/fce7f3/86198f?text=Everyday+Magic" alt="Memory 6" class="w-full h-full object-cover"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page: Our Story (Timeline) -->
+        <section id="story" class="page py-20 px-4">
+            <div class="container mx-auto max-w-3xl">
+                <h2 class="dancing-script text-5xl md:text-7xl text-pink-500 text-center mb-12">The Story of Us</h2>
+                <div class="relative timeline-container ml-6">
+                    <!-- Timeline Item 1 -->
+                    <div class="relative pl-8 pb-12 timeline-item">
+                        <h3 class="playfair-display text-2xl text-purple-800 font-bold">September 19, 2022 - Where It All Began</h3>
+                        <p class="mt-2 text-purple-700">A chance meeting, a shared smile, and the start of something beautiful. Neither of us knew this was the first page of our greatest chapter.</p>
+                    </div>
+                    <!-- Timeline Item 2 -->
+                    <div class="relative pl-8 pb-12 timeline-item">
+                        <h3 class="playfair-display text-2xl text-purple-800 font-bold">November 5, 2022 - Our First Adventure</h3>
+                        <p class="mt-2 text-purple-700">That weekend trip to the mountains. We learned so much about each other, from your love for sunrises to my terrible map-reading skills.</p>
+                    </div>
+                    <!-- Timeline Item 3 -->
+                    <div class="relative pl-8 pb-12 timeline-item">
+                        <h3 class="playfair-display text-2xl text-purple-800 font-bold">June 1, 2023 - Moved In Together</h3>
+                        <p class="mt-2 text-purple-700">Turning a house into a home. Building flat-pack furniture and dreams, side-by-side. The best roommate I've ever had.</p>
+                    </div>
+                     <!-- Timeline Item 4 -->
+                    <div class="relative pl-8 pb-12 timeline-item">
+                        <h3 class="playfair-display text-2xl text-purple-800 font-bold">Today - And Forever</h3>
+                        <p class="mt-2 text-purple-700">Every day with you is my favorite day. The story is still being written, and I can't wait to see what the next page holds for us.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page: Reasons Why I Love You -->
+        <section id="reasons" class="page py-20 px-4">
+            <div class="container mx-auto text-center max-w-4xl">
+                <h2 class="dancing-script text-5xl md:text-7xl text-pink-500 mb-4">Why I Love You</h2>
+                <p class="text-xl text-purple-800 mb-12 max-w-2xl mx-auto">Just a few of the countless reasons... click a heart to see one.</p>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <div class="reason-container">
+                        <div class="reason-heart text-pink-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /></svg>
+                        </div>
+                        <p class="reason-text playfair-display text-2xl text-purple-800">...the way you laugh.</p>
+                    </div>
+                    <div class="reason-container">
+                        <div class="reason-heart text-pink-400">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /></svg>
+                        </div>
+                        <p class="reason-text playfair-display text-2xl text-purple-800">...your kindness to everyone.</p>
+                    </div>
+                     <div class="reason-container">
+                        <div class="reason-heart text-pink-400">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /></svg>
+                        </div>
+                        <p class="reason-text playfair-display text-2xl text-purple-800">...how you always know how to make me smile.</p>
+                    </div>
+                    <div class="reason-container">
+                        <div class="reason-heart text-pink-400">
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /></svg>
+                        </div>
+                        <p class="reason-text playfair-display text-2xl text-purple-800">...that you're my best friend.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Gallery Modal -->
+    <div id="imageModal" class="modal fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none" onclick="closeModal()">
+        <img id="modalImage" src="" alt="Enlarged memory" class="max-w-full max-h-full rounded-lg shadow-2xl">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+
+            // --- Navigation ---
+            function showPage(pageId) {
+                pages.forEach(page => {
+                    page.classList.toggle('active', page.id === pageId);
+                });
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    showPage(pageId);
+                });
+            });
+
+            // --- Home Page Hearts ---
+            const heartsContainer = document.getElementById('hearts-container');
+            if (heartsContainer) {
+                const heartColors = ['#f472b6', '#fb7185', '#fda4af', '#fecdd3'];
+                const createHeart = () => {
+                    if (document.getElementById('home').classList.contains('active')) {
+                        const heart = document.createElement('div');
+                        heart.classList.add('heart');
+                        heart.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+                        heart.style.left = Math.random() * 100 + 'vw';
+                        heart.style.animationDuration = Math.random() * 5 + 8 + 's';
+                        heart.style.opacity = Math.random();
+                        const size = Math.random() * 15 + 10;
+                        heart.style.width = size + 'px';
+                        heart.style.height = size + 'px';
+                        heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+                        heartsContainer.appendChild(heart);
+                        setTimeout(() => heart.remove(), 13000);
+                    }
+                };
+                setInterval(createHeart, 500);
+            }
+
+            // --- Reasons Page ---
+            const reasonHearts = document.querySelectorAll('.reason-heart');
+            reasonHearts.forEach(heart => {
+                heart.addEventListener('click', () => {
+                    const reasonText = heart.parentElement.querySelector('.reason-text');
+                    // Hide all other reasons
+                    document.querySelectorAll('.reason-text').forEach(rt => {
+                        if (rt !== reasonText) rt.style.display = 'none';
+                    });
+                    // Toggle current reason
+                    reasonText.style.display = reasonText.style.display === 'block' ? 'none' : 'block';
+                });
+            });
+        });
+
+        // --- Gallery Modal Functions ---
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+
+        function openModal(imageUrl) {
+            modalImage.src = imageUrl;
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+    </script>
+</body>
+</html>
+
